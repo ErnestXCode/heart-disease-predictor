@@ -1,0 +1,17 @@
+{
+    "builds": [
+        {
+            "src": "./heart_disease_pred/heart_disease_pred.py",
+            "use": "@vercel/python",
+            "config": {
+                "runtime": "python3.10"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "heart_disease_pred/heart_disease_pred.py"
+        }
+    ]
+}
