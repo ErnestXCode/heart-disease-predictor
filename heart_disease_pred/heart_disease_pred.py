@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 import numpy as np
 import pickle
@@ -22,6 +23,19 @@ class model_input(BaseModel):
     thal: int
 
 heart_disease_model = pickle.load(open('heart_disease_model.sav', 'rb'))
+@app.get("/", response_class=HTMLResponse)
+def read_index():
+    return """
+    <html>
+        <head>
+            <title>Hello Page</title>
+        </head>
+        <body>
+            <h1>Welcome to heart disease api</h1>
+        </body>
+    </html>
+    """
+
 
 @app.post('/heart_disease_prediction')
 def heart_disease_pred(input_parameters: model_input):
